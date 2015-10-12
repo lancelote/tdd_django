@@ -4,7 +4,7 @@ from django.test import TestCase
 from solos.views import index
 
 
-class SolosURLsTest(TestCase):
+class SolosURLsTests(TestCase):
 
     def test_root_url_uses_index_view(self):
         """

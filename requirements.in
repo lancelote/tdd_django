@@ -1,2 +1,3 @@
 Django    # python web framework
 selenium  # web test framework
+pylint    # style validation tool
