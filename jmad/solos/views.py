@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response
+from django.views.generic.detail import DetailView
 
 from .models import Solo
 
@@ -18,3 +19,8 @@ def index(request):
         context['solos'] = solos_queryset
 
     return render_to_response('solos/index.html', context)
+
+
+class SoloDetailView(DetailView):
+
+    pass
