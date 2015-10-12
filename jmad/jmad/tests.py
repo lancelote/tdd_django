@@ -36,7 +36,7 @@ class StudentTestCase(LiveServerTestCase):
         # Steve is a jazz student who would like to find more examples of solos
         # so he can improve his own improvisation. He visits the home page of
         # JMAD
-        home_page = self.browser.get(self.live_server_url + '/')
+        self.browser.get(self.live_server_url + '/')
 
         # He knows he's in the right place because he can see the name of the
         # site in the heading
@@ -70,9 +70,16 @@ class StudentTestCase(LiveServerTestCase):
         self.assertEqual(len(second_search_results), 2)
 
         # He clicks on a search result
+        second_search_results[0].click()
 
-        # The solo page has a title, artist and album for this particular solo
+        # On the solo page has a title, artist and album for this particular solo
+        self.assertEqual(self.browser.current_url, '%s/solos/2/' % self.live_server_url)
+        self.assertEqual(self.browser.find_element_by_css_selector('#jmad-artist').text, 'Cannonball Adderley')
+        self.assertEqual(self.browser.find_element_by_css_selector('#jmad-track').text, 'All Blues')
+        self.assertEqual(self.browser.find_element_by_css_selector('#jmad-album').text, 'Kind of Blue')
 
         # He also sees the start and end time of the solo
+        self.assertEqual(self.browser.find_element_by_css_selector('#jmad-start-time').text, '2:06')
+        self.assertEqual(self.browser.find_element_by_css_selector('#jmad-end-time').text, '4:01')
 
         self.fail('Incomplete Test')
