@@ -3,7 +3,7 @@ from django.db.models.query import QuerySet
 
 from albums.models import Album, Track
 from solos.models import Solo
-from solos.views import index, SoloDetailView
+from solos.views import index, solo_detail
 
 
 class SoloBaseTest(TestCase):
@@ -77,10 +77,15 @@ class SoloViewTest(SoloBaseTest):
         """
         Test that the solo view returns a 200 response, uses the correct template and has the correct context
         """
-        request = self.factory.get('/solos/1/')  # URL mapping and etc are skipped
-        response = SoloDetailView.as_view()(request, pk=self.drum_solo.pk)  # Thanks to RequestFactory
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context_data['solo'].artist, 'Rich')
+        request = self.factory.get('/solos/no-funny-hats/bugle-call-rag/buddy-rich/')
         with self.assertTemplateUsed('solos/solo_detail.html'):
-            # Needed to check template correctness
-            response.render()
+            response = solo_detail(
+                request,
+                album=self.no_funny_hats.slug,
+                track=self.bugle_call_rag.slug,
+                artist=self.drum_solo.slug
+            )
+            self.assertEqual(response.status_code, 200)
+            page = response.content.decode()
+            self.assertInHTML('<p id="jmad-artist">Rich</p>', page)
+            self.assertInHTML('<p id="jmad-track">Bugle Call Rag [1 solo]</p>', page)
