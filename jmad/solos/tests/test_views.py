@@ -5,20 +5,27 @@ from solos.models import Solo
 from solos.views import index, SoloDetailView
 
 
-class IndexViewTests(TestCase):
+class SoloBaseTest(TestCase):
 
     def setUp(self):
         self.factory = RequestFactory()
-        self.drum_solo = Solo.objects.create(
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()  # TestCase setUpClass method
+        cls.drum_solo = Solo.objects.create(
             instrument='drums',
             artist='Rich',
             track='Bugle Call Rag'
         )
-        self.bass_solo = Solo.objects.create(
+        cls.bass_solo = Solo.objects.create(
             instrument='saxophone',
             artist='Coltrane',
             track='Mr. PC'
         )
+
+
+class IndexViewTest(SoloBaseTest):
 
     def test_index_view_basics(self):
         """
@@ -41,10 +48,7 @@ class IndexViewTests(TestCase):
         self.assertEqual(solos[0].artist, 'Rich')
 
 
-class SoloViewTest(TestCase):
-
-    def setUp(self):
-        self.factory = RequestFactory()
+class SoloViewTest(SoloBaseTest):
 
     def test_basic(self):
         """
