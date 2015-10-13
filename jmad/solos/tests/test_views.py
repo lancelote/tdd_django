@@ -1,6 +1,7 @@
 from django.test import TestCase, RequestFactory
 from django.db.models.query import QuerySet
 
+from albums.models import Album, Track
 from solos.models import Solo
 from solos.views import index, SoloDetailView
 
@@ -13,15 +14,37 @@ class SoloBaseTest(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()  # TestCase setUpClass method
+
+        cls.no_funny_hats = Album.objects.create(
+            name='No Funny Hats',
+            slug='no-funny-hats'
+        )
+        cls.bugle_call_rag = Track.objects.create(
+            name='Bugle Call Rag',
+            slug='bugle-call-rag',
+            album=cls.no_funny_hats
+        )
         cls.drum_solo = Solo.objects.create(
             instrument='drums',
             artist='Rich',
-            track='Bugle Call Rag'
+            track=cls.bugle_call_rag,
+            slug='rich'
         )
-        cls.bass_solo = Solo.objects.create(
+
+        cls.giant_steps = Album.objects.create(
+            name='Giant Steps',
+            slug='giant-steps'
+        )
+        cls.mr_pc = Track.objects.create(
+            name='Mr. PC',
+            slug='mr-pc',
+            album=cls.giant_steps
+        )
+        cls.sax_solo = Solo.objects.create(
             instrument='saxophone',
             artist='Coltrane',
-            track='Mr. PC'
+            track=cls.mr_pc,
+            slug='coltrane'
         )
 
 
