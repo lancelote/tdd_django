@@ -3,6 +3,7 @@ from django.db import models
 
 from albums.models import Track
 
+
 class Solo(models.Model):
 
     track = models.ForeignKey(Track)
