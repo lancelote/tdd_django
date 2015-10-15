@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.test import LiveServerTestCase
 
 from selenium import webdriver
@@ -80,6 +81,12 @@ class StudentTestCase(LiveServerTestCase):
             album=self.album2
         )
 
+        self.admin_user = get_user_model().objects.create_superuser(
+            username='bill',
+            email='bill@example.com',
+            password='password'
+        )
+
     def tearDown(self):
         self.browser.quit()
 
@@ -155,8 +162,23 @@ class StudentTestCase(LiveServerTestCase):
         self.assertEqual(self.browser.title, 'Log in | Django site admin')
 
         # He enters his username and password and submits the form to log in
+        login_form = self.browser.find_element_by_id('login-form')
+        login_form.find_element_by_name('username').send_keys('bill')
+        login_form.find_element_by_name('password').send_keys('password')
+        login_form.find_element_by_css_selector('.submit-row input').click()
 
         # He sees links to Albums, Tracks, and Solos
+        albums_links = self.browser.find_elements_by_link_text('Albums')
+        self.assertEqual(albums_links[0].get_attribute('href'), self.live_server_url + '/admin/albums/')
+        self.assertEqual(albums_links[1].get_attribute('href'), self.live_server_url + '/admin/albums/album/')
+        self.assertEqual(
+            self.browser.find_element_by_link_text('Tracks').get_attribute('href'),
+            self.live_server_url + '/admin/albums/track/'
+        )
+
+        solos_links = self.browser.find_elements_by_link_text('Solos')
+        self.assertEqual(solos_links[0].get_attribute('href'), self.live_server_url + '/admin/solos/')
+        self.assertEqual(solos_links[1].get_attribute('href'), self.live_server_url + '/admin/solos/solo/')
 
         # He clicks on Albums and sees all of the Albums that have been added so far
 
