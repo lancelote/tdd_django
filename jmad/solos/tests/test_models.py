@@ -44,3 +44,9 @@ class SoloModelTest(TestCase):
             self.solo.get_absolute_url(),
             '/recordings/at-the-stratford-shakespearean-festival/falling-in-love-with-love/oscar-peterson/'
         )
+
+    def test_get_duration(self):
+        """
+        Test that we can print duration of a Solo
+        """
+        self.assertEqual(self.solo.get_duration(), '1:24-4:06')
