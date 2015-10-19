@@ -1,3 +1,4 @@
 Django    # python web framework
 selenium  # web test framework
 pylint    # style validation tool
+musicbrainzngs  # open music database library
