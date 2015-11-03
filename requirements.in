@@ -1,4 +1,5 @@
-Django    # python web framework
-selenium  # web test framework
-pylint    # style validation tool
-musicbrainzngs  # open music database library
+Django               # python web framework
+djangorestframework  # framework for API creating in Django
+selenium             # web test framework
+pylint               # style validation tool
+musicbrainzngs       # open music database library
