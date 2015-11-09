@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework import viewsets, mixins
 
-# Create your views here.
+from .models import Album
+from .serializers import AlbumSerializer
+
+
+class AlbumViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin):
+
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
