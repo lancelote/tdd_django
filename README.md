@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/lancelote/tdd_django.svg)](https://travis-ci.org/lancelote/tdd_django)
-[![Codecov](https://img.shields.io/codecov/c/lancelote/tdd_django.svg)](https://github.com/lancelote/tdd_django)
+[![Codecov](https://img.shields.io/codecov/c/github/lancelote/tdd_django.svg)](https://github.com/lancelote/tdd_django)
 [![Requirements Status](https://requires.io/github/lancelote/tdd_django/requirements.svg?branch=master)](https://requires.io/github/lancelote/tdd_django/requirements/?branch=master)
 
 # tdd_django
