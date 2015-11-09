@@ -23,7 +23,6 @@ class SoloAPITestCase(APITestCase):
         response = self.client.post('/api/solos/', data=post_data, format='json')
 
         self.assertEqual(response.status_code, 201, response.data)
-        print(response.data)
         self.assertEqual(response.data, {
             'url': 'http://testserver/api/solos/1/',
             'artist': 'John Coltrane',
