@@ -1,0 +1,29 @@
+# Travis CI settings
+
+language: python
+
+python:
+  - '3.5'
+
+env:
+  matrix:
+    - DB=sqlite DJANGO_VERSION=1.8.6
+
+install:
+  - pip install --upgrade pip
+  - pip install -r requirements.txt
+
+before_script:
+  - pip install codecov
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3
+  - python3 manage.py migrate
+  - sleep 3
+
+script:
+  - python3 manage.py test solos albums  # Unit tests
+  - python3 manage.py test jmad.tests    # Functional tests
+
+after_success:
+  - codecov  # Generate coverage report

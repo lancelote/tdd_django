@@ -1,3 +1,4 @@
+coverage             # test coverage tool
 Django               # python web framework
 djangorestframework  # framework for API creating in Django
 selenium             # web test framework
