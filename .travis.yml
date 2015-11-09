@@ -22,9 +22,10 @@ before_script:
   - python3 manage.py migrate
   - sleep 3
 
-after_success:
-  - codecov  # Generate coverage report
-
 script:
   - python3 manage.py test solos albums  # Unit tests
   - python3 manage.py test jmad.tests    # Functional tests
+  - coverage run manage.py test solos albums  # Test coverage
+
+after_success:
+  - codecov  # Generate coverage report
