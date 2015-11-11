@@ -7,7 +7,7 @@ class Album(models.Model):
     artist = models.CharField(max_length=100)
     slug = models.SlugField()
 
-    class Meta:
+    class Meta(object):
         ordering = ['name']
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Track(models.Model):
     track_number = models.PositiveIntegerField(blank=True, null=True)
     slug = models.SlugField()
 
-    class Meta:
+    class Meta(object):
         ordering = ['album', 'track_number']
 
     def __str__(self):

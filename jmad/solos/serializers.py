@@ -11,6 +11,6 @@ class SoloSerializer(serializers.HyperlinkedModelSerializer):
         data['slug'] = slugify(data['artist'])
         return data
 
-    class Meta:
+    class Meta(object):
         model = Solo
         read_only_fields = ('slug',)

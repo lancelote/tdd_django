@@ -17,7 +17,7 @@ class Solo(models.Model):
     end_time = models.CharField(max_length=20, blank=True, null=True)
     slug = models.SlugField()
 
-    class Meta:
+    class Meta(object):
         ordering = ['track', 'start_time']
 
     def get_absolute_url(self):

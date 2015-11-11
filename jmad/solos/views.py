@@ -30,7 +30,7 @@ def index(request):
     return render_to_response('solos/index.html', context)
 
 
-def solo_detail(request, album, track, artist):
+def solo_detail(request, album, track, artist):  # pylint: disable=unused-argument
     context = {
         'solo': Solo.objects.get(slug=artist, track__slug=track, track__album__slug=album)
     }
