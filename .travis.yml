@@ -13,7 +13,6 @@ install:
   - pip install --upgrade pip
   - pip install -r requirements.txt
   - pip install codecov
-  - pip install coveralls
 
 before_script:
 
@@ -31,4 +30,3 @@ script:
 
 after_success:
   - codecov  # Generate coverage report
-  - coveralls
